@@ -45,11 +45,11 @@ public class Calculator {
     }
 
     static void printMenu() {
-        System.out.println("Add\n");
-        System.out.println("Subtract\n");
-        System.out.println("Multiply\n");
-        System.out.println("Divide\n");
-        System.out.println("Exit\n");
+        System.out.println("1. Add");
+        System.out.println("2. Subtract");
+        System.out.println("3. Multiply");
+        System.out.println("4. Divide");
+        System.out.println("5. Exit");
     }
 
     static double calculate(int choice, double a, double b) {
