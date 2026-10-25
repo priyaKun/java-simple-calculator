@@ -5,74 +5,53 @@ public class Calculator {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("=== Simple Calculator ===");
+        System.out.println();
 
-        boolean running = true;
-
-        // Milestones 1, 2, and 5: Menu loop, input handling, and exit condition
-        while (running) {
+        while (true) {
             printMenu();
-            System.out.print("Enter your choice (1-5): ");
-
-            if (!scanner.hasNextInt()) {
-                System.out.println("Invalid input. Please enter a number between 1 and 5.\n");
-                scanner.next(); // Clear non-integer input
-                continue;
-            }
+            System.out.print("Choose an option (1-5): ");
 
             int choice = scanner.nextInt();
 
-            // Milestone 5: Exit option
             if (choice == 5) {
-                System.out.println("Exiting calculator. Goodbye!");
-                running = false;
-                continue;
+                System.out.println("Goodbye!");
+                break;
             }
 
-            // Milestone 5: Handling wrong choices
             if (choice < 1 || choice > 5) {
-                System.out.println("Error: Option out of range. Choose between 1 and 5.\n");
+                System.out.println("Please choose a number from 1 to 5.");
+                System.out.println();
                 continue;
             }
 
-            // Milestone 2: Read two operands
-            System.out.print("Enter first number: ");
-            while (!scanner.hasNextDouble()) {
-                System.out.println("Invalid number. Try again: ");
-                scanner.next();
-            }
+            System.out.print("First number: ");
             double a = scanner.nextDouble();
 
-            System.out.print("Enter second number: ");
-            while (!scanner.hasNextDouble()) {
-                System.out.println("Invalid number. Try again: ");
-                scanner.next();
-            }
+            System.out.print("Second number: ");
             double b = scanner.nextDouble();
 
-            // Milestone 4: Division by zero check & calculation
-            if (choice == 4 && b == 0) {
-                System.out.println("Error: Division by zero is undefined.\n");
+            if (choice == 4 && b == 0.0) {
+                System.out.println("Cannot divide by zero.");
             } else {
                 double result = calculate(choice, a, b);
-                System.out.printf("Result: %.2f%n%n", result);
+                char op = getOperator(choice);
+                System.out.printf("%.2f %c %.2f = %.2f%n", a, op, b, result);
             }
+
+            System.out.println();
         }
 
         scanner.close();
     }
 
-    // Milestone 1: Print the options
     static void printMenu() {
-        System.out.println("-------------------------");
-        System.out.println("1. Addition (+)");
-        System.out.println("2. Subtraction (-)");
-        System.out.println("3. Multiplication (*)");
-        System.out.println("4. Division (/)");
-        System.out.println("5. Exit");
-        System.out.println("-------------------------");
+        System.out.println("Add\n");
+        System.out.println("Subtract\n");
+        System.out.println("Multiply\n");
+        System.out.println("Divide\n");
+        System.out.println("Exit\n");
     }
 
-    // Milestone 3: Perform calculation using a switch statement
     static double calculate(int choice, double a, double b) {
         switch (choice) {
             case 1:
@@ -85,6 +64,16 @@ public class Calculator {
                 return a / b;
             default:
                 return 0;
+        }
+    }
+
+    static char getOperator(int choice) {
+        switch (choice) {
+            case 1: return '+';
+            case 2: return '-';
+            case 3: return '*';
+            case 4: return '/';
+            default: return ' ';
         }
     }
 }
